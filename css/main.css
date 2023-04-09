@@ -1,7 +1,14 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@font-face {
+  font-family: AppleGaramond;
+  src: url(../css/AppleGaramond.ttf)s
+}
+
 * {
   box-sizing: border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-    'Helvetica Neue', sans-serif;
+  font-family: 'Inter', sans-serif;
+  
 }
 html {
   font-size: 20px;
@@ -9,7 +16,9 @@ html {
 #collect form {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
+  flex-direction: column;
+  align-content: center;
 }
 #collect form p {
   display: flex;
@@ -19,14 +28,29 @@ html {
 input {
   font-size: 1rem;
   padding: 0.2rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  width: 400px;
+  height: 40px;
+}
+input::placeholder{
+  font-size: 14px;
+}
+
+label {
+  font-family: AppleGaramond;
+  padding-bottom: 4px;
 }
 button {
-  background-color: cornflowerblue;
+  border-radius: 8px;
+  background-color: #1f1f1f;
   color: white;
   font-size: 1rem;
-  padding: 0.2rem 3rem;
+  padding: 16px 22px;
   border: none;
   margin-right: 3rem;
+  width: 180px;
 }
 #display > p {
   text-align: right;
@@ -44,4 +68,35 @@ td {
 }
 tbody > tr:nth-child(odd) {
   background-color: #eee;
+}
+
+.h2 {
+  font-family: AppleGaramond;
+}
+
+.logowrap {
+  padding: 28px;
+  display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.logoimg {
+  width: 36px;
+}
+
+.logotype {
+  font-family: AppleGaramond;
+font-size: 28px;
+margin: 0;
+
+}
+
+.logosub {
+  font-style: italic;
+  font-size: 16px;
+  margin: 0;
+  padding-top: 4px;
 }

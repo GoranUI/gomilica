@@ -8,32 +8,39 @@
     <link rel="stylesheet" href="./css/main.css" />
   </head>
   <body>
+    <div class="logowrap">
+      <img class="logoimg" src="css/gomila_logo.svg" >
+      <h2 class="logotype">Gomilica - Data Tool</h2>
+      <p class="logosub">- S ljubavlju od brata Gorana</p>
+
+    </div>
     <div id="collect">
       <form>
         <p>
           <label for="title">Title</label>
-          <input type="text" id="title" name="title" value="" />
+          <input placeholder="Shiny Title" type="text" id="title" name="title" value="" />
         </p>
         <p>
           <label for="about">About</label>
-          <input type="text" id="about" name="about" value="" />
+          <input placeholder="Place for nice description..." type="text" id="about" name="about" value="" />
         </p>
         <p>
-          <label for="Link">Link</label>
-          <input type="text" id="Link" name="Link" value="" />
+          <label for="Link">Image Link 1</label>
+          <input placeholder="https://gomilica.netlify.app" type="link" id="Link" name="Link" value="" />
         </p>
+        
         <p>
           <label for="tag">Tag</label>
-          <input type="text" id="tag" name="tag" value="" />
+          <input placeholder="This, Is, Lit, Bro" type="text" id="tag" name="tag" value="" />
         </p>
         <p>
-          <button id="btnSave">Save</button>
+          <button id="btnSave">Save To Table</button>
         </p>
       </form>
     </div>
     <div id="display">
       <p>
-        <button id="btnExport">Export</button>
+        <button id="btnExport">Export CSV</button>
       </p>
       <table>
         <thead>
