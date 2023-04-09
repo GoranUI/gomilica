@@ -21,6 +21,7 @@ html {
   align-content: center;
 }
 #collect form p {
+  margin-bottom: 8px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -101,4 +102,21 @@ margin: 0;
   font-size: 16px;
   margin: 0;
   padding-top: 4px;
+}
+
+@media screen and (max-width: 640px) {
+
+  #collect form p {
+    margin-bottom: 4px;
+  }
+
+  input{
+    width: 350px;
+  }
+
+  button {
+    font-size: 14px;
+    width: 160px;
+    
+  }
 }

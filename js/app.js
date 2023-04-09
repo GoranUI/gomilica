@@ -70,7 +70,7 @@ const APP = {
   },
   exportData() {
     //insert the header row
-    APP.data.unshift(['Title', 'About', 'Email', 'Username']);
+    APP.data.unshift(['Title', 'About', 'Link', 'Tag']);
     //convert array to a string with \n at the end
     let str = '';
     APP.data.forEach((row) => {
@@ -114,7 +114,7 @@ const APP = {
     }
   },
   getColumnName(index) {
-    const columns = ['Title', 'About', 'Email', 'Username'];
+    const columns = ['Title', 'About', 'Link', 'Tag'];
     return columns[index];
   }
 };
