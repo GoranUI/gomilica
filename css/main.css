@@ -43,20 +43,22 @@ label {
   padding-bottom: 4px;
 }
 button {
+
   border-radius: 8px;
   background-color: #1f1f1f;
   color: white;
   font-size: 1rem;
   padding: 16px 22px;
   border: none;
-  margin-right: 3rem;
+  margin-right: 10%;
   width: 180px;
 }
 #display > p {
   text-align: right;
 }
 #display table {
-  width: 100%;
+  margin: auto;
+  width: 80%;
   border-collapse: collapse;
   border: 1px solid #ccc;
 }
