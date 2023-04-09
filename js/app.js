@@ -2,6 +2,7 @@ const APP = {
   data: [],
   init() {
     APP.addListeners();
+    APP.loadSavedData();
   },
   addListeners() {
     const form = document.querySelector('#collect form');
@@ -15,6 +16,13 @@ const APP = {
       .querySelector('table tbody')
       .addEventListener('dblclick', APP.editCell);
   },
+  loadSavedData() {
+    const savedData = localStorage.getItem('appData');
+    if (savedData) {
+      APP.data = JSON.parse(savedData);
+      APP.buildTable();
+    }
+  },
   saveData(ev) {
     ev.preventDefault();
     const form = ev.target;
@@ -27,6 +35,8 @@ const APP = {
     form.reset();
     //focus on first name
     document.getElementById('title').focus();
+    //save data to local storage
+    localStorage.setItem('appData', JSON.stringify(APP.data));
   },
   cacheData(formdata) {
     //extract the data from the FormData object and update APP.data
@@ -47,9 +57,20 @@ const APP = {
     tbody.append(tr);
     //data references for later editing
   },
+  buildTable() {
+    const tbody = document.querySelector('#display > table > tbody');
+    APP.data.forEach((row, rowIndex) => {
+      const tr = document.createElement('tr');
+      tr.setAttribute('data-row', rowIndex);
+      row.forEach((col, colIndex) => {
+        tr.innerHTML += `<td data-col="${colIndex}" data-name="${APP.getColumnName(colIndex)}">${col}</td>`;
+      });
+      tbody.append(tr);
+    });
+  },
   exportData() {
     //insert the header row
-    APP.data.unshift(['Title', 'About', 'Link', 'Tags']);
+    APP.data.unshift(['Title', 'About', 'Email', 'Username']);
     //convert array to a string with \n at the end
     let str = '';
     APP.data.forEach((row) => {
@@ -84,6 +105,7 @@ const APP = {
           cell.contentEditable = false;
           cell.removeEventListener('keydown', save);
           APP.data[row][col] = cell.textContent;
+          localStorage.setItem('data', JSON.stringify(APP.data)); // store data in localStorage
           console.table(APP.data);
         }
       });
@@ -91,6 +113,10 @@ const APP = {
       //update the APP.data
     }
   },
+  getColumnName(index) {
+    const columns = ['Title', 'About', 'Email', 'Username'];
+    return columns[index];
+  }
 };
 
-document.addEventListener('DOMContentLoaded', APP.init);
+APP.init();
