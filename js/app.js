@@ -1,122 +1,103 @@
-const APP = {
-  data: [],
-  init() {
-    APP.addListeners();
-    APP.loadSavedData();
-  },
-  addListeners() {
-    const form = document.querySelector('#collect form');
-    form.addEventListener('submit', APP.saveData);
+let firebase = {};
 
-    document
-      .getElementById('btnExport')
-      .addEventListener('click', APP.exportData);
+const initFirebase = async () => {
+  const baseUrl = 'https://www.gstatic.com/firebasejs/9.19.1';
 
-    document
-      .querySelector('table tbody')
-      .addEventListener('dblclick', APP.editCell);
-  },
-  loadSavedData() {
-    const savedData = localStorage.getItem('appData');
-    if (savedData) {
-      APP.data = JSON.parse(savedData);
-      APP.buildTable();
-    }
-  },
-  saveData(ev) {
-    ev.preventDefault();
-    const form = ev.target;
-    const formdata = new FormData(form);
-    //save the data in APP.data
-    APP.cacheData(formdata);
-    //build a row in the table
-    APP.buildRow(formdata);
-    //clear the form
-    form.reset();
-    //focus on first name
-    document.getElementById('title').focus();
-    //save data to local storage
-    localStorage.setItem('appData', JSON.stringify(APP.data));
-  },
-  cacheData(formdata) {
-    //extract the data from the FormData object and update APP.data
-    APP.data.push(Array.from(formdata.values()));
-    console.table(APP.data);
-  },
-  buildRow(formdata) {
-    const tbody = document.querySelector('#display > table > tbody');
-    const tr = document.createElement('tr');
-    tr.innerHTML = '';
-    tr.setAttribute('data-row', document.querySelectorAll('tbody tr').length);
-    let col = 0;
-    //loop through the FormData object entries and build a row with
-    for (let entry of formdata.entries()) {
-      tr.innerHTML += `<td data-col="${col}" data-name="${entry[0]}">${entry[1]}</td>`;
-      col++;
-    }
-    tbody.append(tr);
-    //data references for later editing
-  },
-  buildTable() {
-    const tbody = document.querySelector('#display > table > tbody');
-    APP.data.forEach((row, rowIndex) => {
-      const tr = document.createElement('tr');
-      tr.setAttribute('data-row', rowIndex);
-      row.forEach((col, colIndex) => {
-        tr.innerHTML += `<td data-col="${colIndex}" data-name="${APP.getColumnName(colIndex)}">${col}</td>`;
-      });
-      tbody.append(tr);
-    });
-  },
-  exportData() {
-    //insert the header row
-    APP.data.unshift(['Title', 'About', 'Link', 'Tag']);
-    //convert array to a string with \n at the end
-    let str = '';
-    APP.data.forEach((row) => {
-      str += row
-        .map((col) => JSON.stringify(col))
-        .join(',')
-        .concat('\n');
-    });
+  const [{ initializeApp }, { getDatabase, ref, set, push }] = await Promise.all([
+    import(`${baseUrl}/firebase-app.js`),
+    import(`${baseUrl}/firebase-database.js`),
+  ]);
 
-    //create the file
-    let filename = `dataexport.${Date.now()}.csv`;
-    let file = new File([str], filename, { type: 'text/csv' });
+  const firebaseConfig = {
+    apiKey: 'AIzaSyAXOC6q7YvNKVpxg1nqpwZpbynhR_-qoss',
+    authDomain: 'gomilica-tool.firebaseapp.com',
+    databaseURL: 'https://gomilica-tool-default-rtdb.europe-west1.firebasedatabase.app',
+    projectId: 'gomilica-tool',
+    storageBucket: 'gomilica-tool.appspot.com',
+    messagingSenderId: '1068900019845',
+    appId: '1:1068900019845:web:57d1e8de030023e5fe43ec',
+    measurementId: 'G-Z9MPHEQZ6E',
+  };
 
-    //create an anchor tag with "download" attribute
-    let a = document.createElement('a');
-    a.href = URL.createObjectURL(file);
-    a.download = filename;
-    a.click();
-    //and click the anchor
-  },
-  editCell(ev) {
-    let cell = ev.target.closest('td');
-    if (cell) {
-      let row = +cell.parentElement.getAttribute('data-row');
-      let col = +cell.getAttribute('data-col');
-      //a td was clicked so make it editable
-      cell.contentEditable = true;
-      cell.focus();
-      let txt = cell.textContent;
-      cell.addEventListener('keydown', function save(ev) {
-        if (ev.key === 'Enter' || ev.code === 'Enter') {
-          cell.contentEditable = false;
-          cell.removeEventListener('keydown', save);
-          APP.data[row][col] = cell.textContent;
-          localStorage.setItem('data', JSON.stringify(APP.data)); // store data in localStorage
-          console.table(APP.data);
-        }
-      });
-      //listen for the enter key to end the editing
-      //update the APP.data
-    }
-  },
-  getColumnName(index) {
-    const columns = ['Title', 'About', 'Link', 'Tag'];
-    return columns[index];
-  }
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  firebase = { db, ref, set, push };
 };
 
-APP.init();
+window.onload = () => initFirebase();
+
+const saveButton = document.getElementById('btnSave');
+const titleField = document.getElementById('title');
+const aboutField = document.getElementById('about');
+const linkField = document.getElementById('Link');
+const tagField = document.getElementById('tag');
+
+saveButton.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  const titleValue = titleField.value;
+  const aboutValue = aboutField.value;
+  const linkValue = linkField.value;
+  const tagValue = tagField.value;
+
+  const { db, ref, set, push } = firebase;
+
+  push(ref(db, 'posts'), {
+    title: titleValue,
+    about: aboutValue,
+    link: linkValue,
+    tag: tagValue
+  }).then(() => {
+    titleField.value = '';
+    aboutField.value = '';
+    linkField.value = '';
+    tagField.value = '';
+  }).catch((error) => {
+    console.error(error);
+  });
+});
+
+
+function loadPosts() {
+  const { db, ref, onValue } = firebase;
+
+
+  onValue(ref(db, 'posts'), (snapshot) => {
+    postsContainer.innerHTML = '';
+    console.log(snapshot.val()); // Log the snapshot value to check if any data is being retrieved
+
+
+    snapshot.forEach((childSnapshot) => {
+      const post = childSnapshot.val();
+      const postsContainer = document.getElementById('posts-container');
+
+
+      const postCard = document.createElement('div');
+      postCard.classList.add('post-card');
+
+      const postTitle = document.createElement('h3');
+      postTitle.textContent = post.title;
+
+      const postAbout = document.createElement('p');
+      postAbout.textContent = post.about;
+
+      const postLink = document.createElement('a');
+      postLink.href = post.link;
+      postLink.textContent = post.link;
+
+      const postTag = document.createElement('div');
+      postTag.classList.add('post-tag');
+      postTag.textContent = post.tag;
+
+      postCard.appendChild(postTitle);
+      postCard.appendChild(postAbout);
+      postCard.appendChild(postLink);
+      postCard.appendChild(postTag);
+
+      postsContainer.appendChild(postCard);
+    });
+  });
+}
+
+loadPosts();
