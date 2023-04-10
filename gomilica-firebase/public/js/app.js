@@ -12,62 +12,81 @@ const firebaseConfig = {
   appId: "1:1068900019845:web:57d1e8de030023e5fe43ec",
   measurementId: "G-Z9MPHEQZ6E"
 };
+
 firebase.initializeApp(firebaseConfig);
 
-// Get a reference to the Firebase database
-const db = firebase.firestore();
 
-// Get references to the form and table elements
+// Get a reference to the database service
+const database = firebase.database();
+
+// Get elements from the DOM
 const form = document.querySelector("form");
-const tableBody = document.querySelector("tbody");
+const table = document.querySelector("tbody");
+const exportBtn = document.querySelector("#btnExport");
 
-// Handle form submission
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
+// Save data to the database
+form.addEventListener("submit", (event) => {
+  event.preventDefault(); // Prevent form from submitting
 
-  // Get the form data
-  const formData = new FormData(form);
+  // Get form data
+  const title = form.elements["title"].value;
+  const about = form.elements["about"].value;
+  const link = form.elements["Link"].value;
+  const tag = form.elements["tag"].value;
 
-  // Create a new document in the "data" collection with the form data
-  try {
-    await db.collection("data").add({
-      title: formData.get("title"),
-      about: formData.get("about"),
-      link: formData.get("link"),
-      tag: formData.get("tag"),
-    });
+  // Create a new data object to save to the database
+  const newData = {
+    title: title,
+    about: about,
+    link: link,
+    tag: tag,
+  };
 
-    // Clear the form
-    form.reset();
+  // Push the new data to the database
+  database.ref("data").push(newData);
 
-    // Refresh the table
-    await refreshTable();
-  } catch (error) {
-    console.error(error);
-  }
+  // Reset the form
+  form.reset();
 });
 
-// Handle table refresh
-async function refreshTable() {
+// Display data in the table
+database.ref("data").on("value", (snapshot) => {
   // Clear the table
-  tableBody.innerHTML = "";
+  table.innerHTML = "";
 
-  // Get all the documents in the "data" collection
-  const snapshot = await db.collection("data").get();
-
-  // Add each document to the table
-  snapshot.forEach((doc) => {
-    const data = doc.data();
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${data.title}</td>
-      <td>${data.about}</td>
-      <td><a href="${data.link}">${data.link}</a></td>
-      <td>${data.tag}</td>
-    `;
-    tableBody.appendChild(row);
+  // Loop through the data and add it to the table
+  snapshot.forEach((childSnapshot) => {
+    const childData = childSnapshot.val();
+    const row = table.insertRow();
+    row.insertCell().textContent = childData.title;
+    row.insertCell().textContent = childData.about;
+    row.insertCell().textContent = childData.link;
+    row.insertCell().textContent = childData.tag;
   });
-}
+});
 
-// Initial table refresh
-refreshTable();
+// Export data as CSV
+exportBtn.addEventListener("click", () => {
+  let csv = "Title, About, Link, Tag\n";
+
+  database
+    .ref("data")
+    .once("value")
+    .then((snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        const childData = childSnapshot.val();
+        csv += `"${childData.title}", "${childData.about}", "${childData.link}", "${childData.tag}"\n`;
+      });
+
+      // Download the CSV file
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", "data.csv");
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+});
