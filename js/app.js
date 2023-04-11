@@ -3,7 +3,7 @@ let firebase = {};
 const initFirebase = async () => {
   const baseUrl = 'https://www.gstatic.com/firebasejs/9.19.1';
 
-  const [{ initializeApp }, { getDatabase, ref, set, push }] = await Promise.all([
+  const [{ initializeApp }, { getDatabase, ref, set, push, onValue }] = await Promise.all([
     import(`${baseUrl}/firebase-app.js`),
     import(`${baseUrl}/firebase-database.js`),
   ]);
@@ -22,10 +22,8 @@ const initFirebase = async () => {
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
 
-  firebase = { db, ref, set, push };
+  firebase = { db, ref, set, push, onValue };
 };
-
-window.onload = () => initFirebase();
 
 const saveButton = document.getElementById('btnSave');
 const titleField = document.getElementById('title');
@@ -64,27 +62,31 @@ function loadPosts() {
 
 
   onValue(ref(db, 'posts'), (snapshot) => {
+    const postsContainer = document.getElementById('posts-container');
     postsContainer.innerHTML = '';
-    console.log(snapshot.val()); // Log the snapshot value to check if any data is being retrieved
-
 
     snapshot.forEach((childSnapshot) => {
       const post = childSnapshot.val();
-      const postsContainer = document.getElementById('posts-container');
-
 
       const postCard = document.createElement('div');
       postCard.classList.add('post-card');
 
       const postTitle = document.createElement('h3');
       postTitle.textContent = post.title;
+      postTitle.classList.add('card-title');
 
       const postAbout = document.createElement('p');
       postAbout.textContent = post.about;
+      postTitle.classList.add('card-about');
 
       const postLink = document.createElement('a');
       postLink.href = post.link;
       postLink.textContent = post.link;
+      postTitle.classList.add('card-about');
+
+      const postImg = document.createElement ('img');
+      postImg.src = 'https://picsum.photos/200/150?s='+post.title;
+
 
       const postTag = document.createElement('div');
       postTag.classList.add('post-tag');
@@ -94,10 +96,14 @@ function loadPosts() {
       postCard.appendChild(postAbout);
       postCard.appendChild(postLink);
       postCard.appendChild(postTag);
+      postCard.appendChild(postImg);
 
       postsContainer.appendChild(postCard);
     });
   });
 }
 
-loadPosts();
+window.onload = async () => {
+  await initFirebase();
+  loadPosts();
+};
