@@ -30,6 +30,7 @@ const titleField = document.getElementById('title');
 const aboutField = document.getElementById('about');
 const linkField = document.getElementById('Link');
 const tagField = document.getElementById('tag');
+const imgLinkField = document.getElementById('imgLink');
 
 saveButton.addEventListener('click', (event) => {
   event.preventDefault();
@@ -38,30 +39,37 @@ saveButton.addEventListener('click', (event) => {
   const aboutValue = aboutField.value;
   const linkValue = linkField.value;
   const tagValue = tagField.value;
+  const imgLinkValue = imgLinkField.value;
+
+  const collectionValue = document.getElementById('collections').value;
 
   const { db, ref, set, push } = firebase;
 
-  push(ref(db, 'posts'), {
+  push(ref(db, collectionValue), {
     title: titleValue,
     about: aboutValue,
     link: linkValue,
-    tag: tagValue
+    tag: tagValue,
+    imgLink: imgLinkValue,
+
   }).then(() => {
     titleField.value = '';
     aboutField.value = '';
     linkField.value = '';
     tagField.value = '';
+    imgLinkField.value = '';
   }).catch((error) => {
     console.error(error);
   });
 });
 
 
+
 function loadPosts() {
   const { db, ref, onValue } = firebase;
 
 
-  onValue(ref(db, 'posts'), (snapshot) => {
+  onValue(ref(db, collectionValue), (snapshot) => {
     const postsContainer = document.getElementById('posts-container');
     postsContainer.innerHTML = '';
 
@@ -85,7 +93,8 @@ function loadPosts() {
       postTitle.classList.add('card-about');
 
       const postImg = document.createElement ('img');
-      postImg.src = 'https://picsum.photos/200/150?s='+post.title;
+      postImg.classList.add('card-img');
+      postImg.src = post.imgLink;
 
 
       const postTag = document.createElement('div');
