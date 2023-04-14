@@ -14,7 +14,6 @@ showMoreBtn.addEventListener('click', (event) => {
 
 showLessBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    a
     const container = document.querySelector('.container-big');
     container.style.maxHeight = '748px';
     showMoreBtn.style.display = 'block';

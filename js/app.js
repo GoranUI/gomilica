@@ -208,9 +208,6 @@ for (const collectionValue of collections) {
       postLink.textContent = post.link;
       postTitle.classList.add('card-about');
 
-      const postImg = document.createElement ('img');
-      postImg.classList.add('card-img');
-      postImg.src = post.imgLink;
 
       const postTag = document.createElement('div');
       postTag.classList.add('post-tag');
