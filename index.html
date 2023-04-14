@@ -6,84 +6,191 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gomilica - Data Tool</title>
     <link rel="stylesheet" href="./css/main.css" />
-
-
-
   </head>
   <body>
     <div class="logowrap">
       <img class="logoimg" src="css/gomila_logo.svg" >
       <h2 class="logotype">Gomilica - Data Tool</h2>
-      <p class="logosub">- S ljubavlju od brata Gorana</p>
-
+      <p class="logosub">- S ljubavlju od brata Gorana</div>
     </div>
-    <div id="collect">
+    <div class="container-wrap">
+    
+    <div class="container-row" >
+      <div class="container">
+      <h3>About Creator</h3>
       <form>
-        <p>
-          <label for="collections">Select Category:</label>
-          <select name="collections" id="collections">
+        <div class="form-field">
+          <label for="collections">* Select Category:</label>
+          <select  name="collections" id="collections" required>
+            <option value="unselected">Select Category (required)</option>
             <option value="workspaces">Workspaces</option>
             <option value="branding">Branding</option>
             <option value="dopefolios">Dopefolios</option>
             <option value="user-interfaces">User Interfaces</option>
           </select>
-        </p>
-        <p>
-          <label for="title">Title</label>
-          <input placeholder="Shiny Title" type="text" id="title" name="title" value="" />
-        </p>
-        <p>
+        </div>
+        <div class="form-field">
+          <label for="title">* Title</label>
+          <input  placeholder="Shiny Title" type="text" id="title" name="title" value="" required/>
+        </div>
+        <div class="form-field">
           <label for="about">About</label>
           <input placeholder="Place for nice description..." type="text" id="about" name="about" value="" />
-        </p>
-        <p>
-          <label for="Link">Link</label>
-          <input placeholder="https://gomilica.netlify.app" type="link" id="Link" name="Link" value="" />
-        </p>
-        <p>
-          <label for="imgLink">Image Link</label>
-          <input placeholder="https://gomilica.netlify.app" type="link" id="imgLink" name="imgLink" value="" />
-        </p>
-        
-        <p>
-          <label for="tag">Tag</label>
-          <input placeholder="This, Is, Lit, Bro" type="text" id="tag" name="tag" value="" />
-        </p>
-        <p>
-          <button id="btnSave">Save To Table</button>
-        </p>
+        </div>
+        <div class="form-field">
+          <label for="twitterUsername">Twitter Username</label>
+          <input placeholder="Your Twitter username" type="text" id="twitterUsername" name="twitterUsername" value="@"
+          minlength="2" maxlength="16"  />        
+        </div>
+        <div class="form-field">
+          <label for="twitterURL">Twitter URL</label>
+          <input placeholder="https://twitter.com/" type="text" id="twitterURL" name="twitterURL" value="" />
+        </div>
+
+        <div class="form-field">
+          <label for="twitterImgUrl">Twitter Image URL</label>
+          <input placeholder="https://your-image-url.jpg" type="url" id="twitterImg" name="twitterImgUrl" value="" />
+        </div>
+        <div class="form-field">
+          <label for="instagramUrl">Instagram URL</label>
+          <input placeholder="https://instagram.com/" type="url" id="instagramUrl" name="instagramUrl" value="" />
+        </div>
+        <div class="form-field">
+          <label for="websiteUrl">Website URL</label>
+          <input placeholder="https://your-website-url.com" type="url" id="websiteUrl" name="websiteUrl" value="" />
+        </div>
       </form>
     </div>
 
-    <div id="posts-container"></div>
-
-    
-    <div id="display">
-      <p>
-        <button id="btnExport">Export CSV</button>
-      </p>
-      <table>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>About</th>
-            <th>Link</th>
-            <th>Tag</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- <tr data-row="0">
-            <td data-col="0" data-name="title">Sample</td>
-            <td data-col="1">about</td>
-            <td>gomila.co</td>
-            <td>freesample</td>
-          </tr> -->
-        </tbody>
-      </table>
+        <div class="container">
+      <form>
+        <h3>Advanced</h3>
+        <div class="form-field">
+          <label for="filter-tag">Filter Tag</label>
+          <input placeholder="Enter filter tag" type="text" id="filter-tag" name="filter-tag" value="all" />
+        </div>
+        <div class="form-field">
+          <label for="slug">Slug</label>
+          <input placeholder="Enter slug" type="text" id="slug" name="slug" value="" />
+        </div>
+        <h3 class="container-header">Gear</h3>
+      <form>
+        <div class="form-field">
+          <label for="gear1">Gear 1</label>
+          <input type="text" placeholder="Gear Item 1" id="gear1" name="gear1" value="" />
+        </div>
+        <div class="form-field">
+          <label for="gear2">Gear 2</label>
+          <input type="text" placeholder="Gear Item 2" id="gear2" name="gear2" value="" />
+        </div>
+        <div class="form-field">
+          <label for="gear3">Gear 3</label>
+          <input type="text" placeholder="Gear Item 3" id="gear3" name="gear3" value="" />
+        </div>
+        <div class="form-field">
+          <label for="gear4">Gear 4</label>
+          <input type="text" placeholder="Gear Item 4" id="gear4" name="gear4" value="" />
+        </div>
+        <div class="form-field">
+          <label for="gear5">Gear 5</label>
+          <input type="text" placeholder="Gear Item 5" id="gear5" name="gear5" value="" />
+        </div>
+        </form>
+      </div>
     </div>
+    <div class="container-big">
+      <h3>Images</h3>
+      <form>
+        <div class="form-field">
+          <label for="imgLink1">Image Link 1</label>
+          <input placeholder="https://your-image-url.jpg" type="url" id="imgLink1" name="imgLink1" value="" />
+        </div>
+        <div class="form-field">
+          <label for="imgLink2">Image Link 2</label>
+          <input placeholder="https://your-image-url.jpg" type="url" id="imgLink2" name="imgLink2" value="" />
+        </div>
+        <div class="form-field">
+          <label for="imgLink3">Image Link 3</label>
+          <input placeholder="https://your-image-url.jpg" type="url" id="imgLink3" name="imgLink3" value="" />
+        </div>
+        <div class="form-field">
+          <label for="imgLink4">Image Link 4</label>
+          <input placeholder="https://your-image-url.jpg" type="url" id="imgLink4" name="imgLink4" value="" />
+        </div>
+        <div class="form-field">
+          <label for="imgLink5">Image Link 5</label>
+          <input placeholder="https://your-image-url.jpg" type="url" id="imgLink5" name="imgLink5" value="" />
+        </div>
+        <div class="form-field">
+          <label for="imgLink6">Image Link 6</label>
+          <input placeholder="https://your-image-url.jpg" type="url" id="imgLink6" name="imgLink6" value="" />
+        </div>
+        <div class="form-field">
+          <label for="imgLink7">Image Link 7</label>
+          <input placeholder="https://your-image-url.jpg" type="url" id="imgLink7" name="imgLink7" value="" />
+        </div>
 
+        <div class="form-field">
+          <label for="imgLink8">Image Link 8</label>
+          <input placeholder="https://your-image-url.jpg" type="url" id="imgLink8" name="imgLink8" value="" />
+        </div>
+        <button id="show-more-btn" class="show-more-button">Want to add more photos? Click me &#128513</button>
+
+        <div class="form-field">
+          <label for="imgLink9">Image Link 9</label>
+          <input placeholder="https://your-image-url.jpg" type="url" id="imgLink9" name="imgLink9" value="" />
+        </div>
+        <div class="form-field">
+          <label for="imgLink10">Image Link 10</label>
+          <input placeholder="https://your-image-url.jpg" type="url" id="imgLink10" name="imgLink10" value="" />
+        </div>
+        <div class="form-field">
+          <label for="imgLink11">Image Link 11</label>
+          <input placeholder="https://your-image-url.jpg" type="url" id="imgLink11" name="imgLink11" value="" />
+        </div>
+        <div class="form-field">
+          <label for="imgLink12">Image Link 12</label>
+          <input placeholder="https://your-image-url.jpg" type="url" id="imgLink12" name="imgLink12" value="" />
+        </div>
+        <button id="show-less-btn" class="show-less-button">Show Less Fields &#x261D</button>
+      </form>
+    </div>
+  </div>
+  <div class="form-field flex-center">
+    <h2>Form all set?</h2>
+    <button class="primary-button" id="btnModal">Send it to the 'net!</button>
+  </div>
     
-      <script src="js/app.js"></script>
+  </div>
 
-  </body>
-</html>
+  <div class="modal" id="modal" hidden>
+    <div class="modal-content">
+      <div class="text-stack">
+        <h2>Double checking, all good?</h2>
+        <p>Please take a moment to decide whether you would like to push the form data to the database or make further edits.</p>
+        <p>The choice is yours!</p>
+      </div>
+      <div class="button-stack">
+        <button class="primary-button" id="btnSave">Push</button>
+        <button class="back-button" id="backBtn">Let's get back to tinkering! &#x1F914</button>
+      </div>
+    </div>
+  </div>
+    
+    
+
+      <div class="posts-container" id="posts-container"></div>
+
+      
+      <div id="display">
+        <div class="form-field">
+          <button class="primary-button" id="btnExport">Export CSV</button>
+        </div>
+        
+      </div>
+
+        <script src="js/style.js"></script>
+        <script src="js/app.js"></script>
+
+    </body>
+  </html>
