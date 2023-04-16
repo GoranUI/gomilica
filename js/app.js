@@ -115,7 +115,7 @@ saveButton.addEventListener('click', (event) => {
     twitterURL: twitterURLValue,
     twitterImg: twitterImgValue,
     instagramUrl: instagramUrlValue,
-    websiteURL: websiteUrlValue,
+    websiteUrl: websiteUrlValue,
 
     gear1: gear1Value,
     gear2: gear2Value,
@@ -194,32 +194,144 @@ for (const collectionValue of collections) {
 
       const postCard = document.createElement('div');
       postCard.classList.add('post-card');
+      
 
-      const postTitle = document.createElement('h3');
+      const postTitle = document.createElement('h2');
       postTitle.textContent = post.title;
       postTitle.classList.add('card-title');
 
       const postAbout = document.createElement('p');
       postAbout.textContent = post.about;
-      postTitle.classList.add('card-about');
+      postAbout.classList.add('card-about');
 
-      const postLink = document.createElement('a');
-      postLink.href = post.link;
-      postLink.textContent = post.link;
-      postTitle.classList.add('card-about');
+      const postSlug = document.createElement('p');
+      postSlug.textContent = post.slug;
+      postSlug.classList.add('card-slug');
 
-
-      const postTag = document.createElement('div');
-      postTag.classList.add('post-tag');
+      const postTag = document.createElement('p');
       postTag.textContent = post.tag;
+      postTag.classList.add('card-tag');
+
+      const postTwitterUsername = document.createElement('p');
+      postTwitterUsername.textContent = post.twitterUsername;
+      postTwitterUsername.classList.add('card-tw-username');
+
+      const postTwitterImg = document.createElement('p');
+      postTwitterImg.textContent = post.twitterImg;
+      postTwitterImg.classList.add('card-tw-img');
+
+      const postTwitterURL = document.createElement('p');
+      postTwitterURL.textContent = post.twitterURL;
+      postTwitterURL.classList.add('card-tw-url');
+
+      const postInstagramURL = document.createElement('p');
+      postInstagramURL.textContent = post.instagramUrl;
+      postInstagramURL.classList.add('card-ig-url');
+
+      const postWebsiteUrl = document.createElement('p');
+      postWebsiteUrl.textContent = post.websiteUrl;
+      postWebsiteUrl.classList.add('card-web-url');
+
+      const postGearItem1 = document.createElement('p');
+      postGearItem1.textContent = post.gearItem1;
+      postGearItem1.classList.add('card-gear');
+
+      const postGearItem2 = document.createElement('p');
+      postGearItem2.textContent = post.gearItem2;
+      postGearItem2.classList.add('card-gear');
+
+      const postGearItem3 = document.createElement('p');
+      postGearItem3.textContent = post.gearItem3;
+      postGearItem3.classList.add('card-gear');
+
+      const postGearItem4 = document.createElement('p');
+      postGearItem4.textContent = post.gearItem4;
+      postGearItem4.classList.add('card-gear');
+
+      const postGearItem5 = document.createElement('p');
+      postGearItem5.textContent = post.gearItem5;
+      postGearItem5.classList.add('card-gear');
+
+      const postImgLink1 = document.createElement('p');
+      postImgLink1.textContent = post.imgLink1;
+      postImgLink1.classList.add('card-img');
+      
+      const postImgLink2 = document.createElement('p');
+      postImgLink2.textContent = post.imgLink2;
+      postImgLink2.classList.add('card-img');
+
+      const postImgLink3 = document.createElement('p');
+      postImgLink3.textContent = post.imgLink3;
+      postImgLink3.classList.add('card-img');
+
+      const postImgLink4 = document.createElement('p');
+      postImgLink4.textContent = post.imgLink4;
+      postImgLink4.classList.add('card-img');
+
+      const postImgLink5 = document.createElement('p');
+      postImgLink5.textContent = post.imgLink5;
+      postImgLink5.classList.add('card-img');
+
+      const postImgLink6 = document.createElement('p');
+      postImgLink6.textContent = post.imgLink6;
+      postImgLink6.classList.add('card-img');
+      
+      const postImgLink7 = document.createElement('p');
+      postImgLink7.textContent = post.imgLink7;
+      postImgLink7.classList.add('card-img');
+
+      const postImgLink8 = document.createElement('p');
+      postImgLink8.textContent = post.imgLink8;
+      postImgLink8.classList.add('card-img');
+
+      const postImgLink9 = document.createElement('p');
+      postImgLink9.textContent = post.imgLink9;
+      postImgLink9.classList.add('card-img');
+      
+      const postImgLink10 = document.createElement('p');
+      postImgLink10.textContent = post.imgLink10;
+      postImgLink10.classList.add('card-img');
+      
+      const postImgLink11 = document.createElement('p');
+      postImgLink11.textContent = post.imgLink11;
+      postImgLink11.classList.add('card-img');
+      
+      const postImgLink12 = document.createElement('p');
+      postImgLink12.textContent = post.imgLink12;
+      postImgLink12.classList.add('card-img');
+
 
       postCard.appendChild(postTitle);
       postCard.appendChild(postAbout);
-      postCard.appendChild(postLink);
+      postCard.appendChild(postSlug);
       postCard.appendChild(postTag);
-      postCard.appendChild(postImg);
 
-      postsContainer.appendChild(postCard);
+      postCard.appendChild(postTwitterImg);
+      postCard.appendChild(postTwitterURL);
+      postCard.appendChild(postWebsiteUrl);
+      postCard.appendChild(postInstagramURL);
+
+      postCard.appendChild(postGearItem1);
+      postCard.appendChild(postGearItem2);
+      postCard.appendChild(postGearItem3);
+      postCard.appendChild(postGearItem4);
+      postCard.appendChild(postGearItem5);
+
+      postCard.appendChild(postImgLink1);
+      postCard.appendChild(postImgLink2);
+      postCard.appendChild(postImgLink3);
+      postCard.appendChild(postImgLink4);
+      postCard.appendChild(postImgLink5);
+      postCard.appendChild(postImgLink6);
+      postCard.appendChild(postImgLink7);
+      postCard.appendChild(postImgLink8);
+      postCard.appendChild(postImgLink9);
+      postCard.appendChild(postImgLink10);
+      postCard.appendChild(postImgLink11);
+      postCard.appendChild(postImgLink12);
+
+    postsContainer.appendChild(postCard);
+
     });
   });
 }
