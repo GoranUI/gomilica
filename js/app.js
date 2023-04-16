@@ -66,6 +66,20 @@ const imgLink12Field = document.getElementById('imgLink12');
 saveButton.addEventListener('click', (event) => {
   event.preventDefault();
 
+  const saveButton = document.getElementById('btnSave');
+  const textStack = document.querySelector('.text-stack');
+  const buttonStack = document.querySelector('.button-stack');
+
+  saveButton.addEventListener('click', () => {
+  // perform action to hide button-stack
+  buttonStack.style.display = 'none';
+  
+  // perform action to display checkmark animation
+  textStack.innerHTML = `
+    <h2>Congratulations!</h2>
+    <p>Your form has been submitted successfully &#x2714;</p>`;
+  });
+
   const titleValue = titleField.value;
   const aboutValue = aboutField.value;
 
