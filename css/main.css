@@ -9,6 +9,7 @@
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
   
+  
 }
 html {
   font-size: 20px;
@@ -198,7 +199,6 @@ margin: 0;
 }
 
 .posts-container {
-  gap: 54px;
   display: flex;
   align-items: center;
   justify-items: start;
@@ -251,6 +251,167 @@ margin: 0;
   flex-direction: row;
   gap: 20px;
   padding-top: 24px;
+}
+
+/* Table CSS */
+
+/* Table HEAD */
+
+.table-layout {
+  padding: 24px;
+  background: white;
+  border-radius: 36px;
+  height: fit-content;
+}
+
+.table-head   {
+  background-color: #f0f0f0;
+  border-radius: 12px 12px 0px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 72px;
+
+}  
+
+.label {
+  display: flex;
+  padding-left: 24px;
+  padding-right: 24px;
+  border-right: #ccc solid 2px;
+  height: 48px;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+}
+
+.label:last-child {
+  border: none;
+}
+
+.select, .select-div, .slug, .slug-div, .tags, .tags-div, .expand, .expand-div  {
+  width: 112px;
+}
+
+
+.images, .card-img-container {
+  width: 280px;
+  overflow: hidden;
+  max-height: 64px;
+}
+.title, .title-div {
+  width: 154px;
+}
+.about, .about-div {
+  width: 220px;
+}
+
+.twitter, .card-tw-container {
+  width: 160px;
+}
+
+.social, .card-social-container {
+  width: 160px;
+}
+
+.table-label {
+  font-size: 18px;
+    font-weight: 600;
+    color: #515151;
+    text-align: center;
+}
+
+.mark-for-export {
+  width: 28px;
+}
+
+.card-img-container {
+  display: flex;
+    justify-items: start;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 8px;
+    padding: 8px;
+}
+
+.card-img {
+  width: 48px;
+  height: 48px;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f1f1f;
+  text-align: center;
+}
+
+.card-about, .card-tag {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1f1f1f;
+  text-align: center;
+}
+/* Table Posts */
+.post-card {
+    display: flex;
+    flex-direction: row;
+    height: 72px;
+    overflow: hidden;
+    border-bottom: #a1a1a1 solid 1px;
+    align-items: center;
+}
+
+.select-div, .title-div, .about-div, .slug-div, .tags-div, .card-img-container, .card-social-container, .card-tw-container, .gear-div, .expand-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Custom checkbox appearance */
+.post-card input[type="checkbox"].expand-checkbox {
+  background: white;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  height: 24px;
+  width: 24px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+
+.post-card input[type="checkbox"].expand-checkbox::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 10px 0px 10px;
+  border-color: #a1a1a1 transparent transparent transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.post-card input[type="checkbox"].expand-checkbox:checked {
+  border-color: #515151;
+}
+
+.post-card input[type="checkbox"].expand-checkbox:checked::before {
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #515151 transparent;
+  top: calc(50% + 2.5px);
+}
+
+.post-card input[type="checkbox"].expand-checkbox:checked + .post-card {
+  height: 400px;
 }
 
 

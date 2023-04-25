@@ -1,4 +1,4 @@
-// 
+
 //  Image Container Expand Script
 const showMoreBtn = document.querySelector('#show-more-btn');
 const showLessBtn = document.querySelector('#show-less-btn');
@@ -58,9 +58,8 @@ const logosub = document.querySelector('.logosub');
 logosub.innerText = `- ${messages[Math.floor(Math.random() * messages.length)]}`;
 
 
-// 
 
-// Twitte Fields Script
+// Twitter Fields Script
 
 const twitterUsername = document.querySelector('#twitterUsername');
 const twitterURL = document.querySelector('#twitterURL');
@@ -73,4 +72,6 @@ twitterUsername.addEventListener('input', () => {
   // Set the value of the Twitter URL field
   twitterURL.value = `https://twitter.com/${username}`;
 });
+
+
 
