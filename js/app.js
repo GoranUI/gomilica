@@ -66,20 +66,6 @@ const imgLink12Field = document.getElementById('imgLink12');
 saveButton.addEventListener('click', (event) => {
   event.preventDefault();
 
-  const saveButton = document.getElementById('btnSave');
-  const textStack = document.querySelector('.text-stack');
-  const buttonStack = document.querySelector('.button-stack');
-
-  saveButton.addEventListener('click', () => {
-  // perform action to hide button-stack
-  buttonStack.style.display = 'none';
-  
-  // perform action to display checkmark animation
-  textStack.innerHTML = `
-    <h2>Congratulations!</h2>
-    <p>Your form has been submitted successfully &#x2714;</p>`;
-  });
-
   const titleValue = titleField.value;
   const aboutValue = aboutField.value;
 
@@ -137,18 +123,18 @@ saveButton.addEventListener('click', (event) => {
     gear4: gear4Value,
     gear5: gear5Value,
 
-    image1: imgLink1Value,
-    image2: imgLink2Value,
-    image3: imgLink3Value,
-    image4: imgLink4Value,
-    image5: imgLink5Value,
-    image6: imgLink6Value,
-    image7: imgLink7Value,
-    image8: imgLink8Value,
-    image9: imgLink9Value,
-    image10: imgLink10Value,
-    image11: imgLink11Value,
-    image12: imgLink12Value,
+    imgLink1: imgLink1Value,
+    imgLink2: imgLink2Value,
+    imgLink3: imgLink3Value,
+    imgLink4: imgLink4Value,
+    imgLink5: imgLink5Value,
+    imgLink6: imgLink6Value,
+    imgLink7: imgLink7Value,
+    imgLink8: imgLink8Value,
+    imgLink9: imgLink9Value,
+    imgLink10: imgLink10Value,
+    imgLink11: imgLink11Value,
+    imgLink12: imgLink12Value,
 
 
 
@@ -187,8 +173,20 @@ saveButton.addEventListener('click', (event) => {
   }).catch((error) => {
     console.error(error);
   });
+/*
+  const saveButton = document.getElementById('btnSave');
+  const textStack = document.querySelector('.text-stack');
+  const buttonStack = document.querySelector('.button-stack');
 
+  saveButton.addEventListener('click', () => {
+  // perform action to hide button-stack
+  buttonStack.style.display = 'none';
   
+  // perform action to display checkmark animation
+  textStack.innerHTML = `
+    <h2>Congratulations!</h2>
+    <p>Your form has been submitted successfully &#x2714;</p>`;
+  }); */
 });
 
 
@@ -211,6 +209,7 @@ for (const collectionValue of collections) {
 
       const postCard = document.createElement('div');
       postCard.classList.add('post-card');
+      postCard.classList.add(collectionValue);
       
       const postSelectDiv = document.createElement('div');
       postSelectDiv.classList.add('select-div');
@@ -219,6 +218,13 @@ for (const collectionValue of collections) {
       postSelect.setAttribute("type", "checkbox");
       postSelect.id = 'export-checkbox-' + index++;
       postSelect.classList.add('mark-for-export');
+
+      const postCollectionDiv = document.createElement('div');
+      postCollectionDiv.classList.add('collection-div');
+      
+      const postCollection = document.createElement('p');
+      postCollection.textContent = collectionValue;
+      postCollection.classList.add('card-collection');
 
       const postTitleDiv = document.createElement('div');
       postTitleDiv.classList.add('title-div');
@@ -248,7 +254,11 @@ for (const collectionValue of collections) {
       postTag.textContent = post.tag;
       postTag.classList.add('card-tag');
 
-      const postTwitterContainer = document.createElement('div');
+      const postTwitterContainerDiv = document.createElement('div');
+      postTwitterContainerDiv.classList.add('tw-div');
+
+      const postTwitterContainer = document.createElement('a');
+      postTwitterContainer.href = post.twitterURL;
       postTwitterContainer.classList.add('card-tw-container');
 
       const postTwitterUsername = document.createElement('p');
@@ -262,20 +272,23 @@ for (const collectionValue of collections) {
       const postTwitterURL = document.createElement('p');
       postTwitterURL.textContent = post.twitterURL;
       postTwitterURL.classList.add('card-tw-url');
-
+    
       const postSocialsContainer = document.createElement('div');
       postSocialsContainer.classList.add('card-social-container');
 
       const postInstagramURL = document.createElement('a');
       postInstagramURL.href = post.instagramUrl;
-      postInstagramURL.innerHTML = '';
+      postInstagramURL.classList.add ('iglogo');
+      postInstagramURL.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" class="webicon" /></svg>';
 
       const postWebsiteUrlImage = document.createElement('a');
       postWebsiteUrlImage.href = post.websiteUrl;
-      postWebsiteUrlImage.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="webicon"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" /></svg>';
+      postWebsiteUrlImage.classList.add ('globe');
+      postWebsiteUrlImage.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" class="webicon" /></svg>';
 
       const postGearDiv = document.createElement('div');
       postGearDiv.classList.add('gear-div');
+
 
       const postGearItem1 = document.createElement('p');
       postGearItem1.textContent = post.gearItem1;
@@ -299,54 +312,33 @@ for (const collectionValue of collections) {
 
       const postImageContainer = document.createElement('div');
       postImageContainer.classList.add('card-img-container');
+      postImageContainer.id = 'card-img-id';
 
-      const postImgLink1 = document.createElement('img');
-      postImgLink1.src = post.imgLink1;
-      postImgLink1.classList.add('card-img');
-      
-      const postImgLink2 = document.createElement('img');
-      postImgLink2.src = post.imgLink2;
-      postImgLink2.classList.add('card-img');
+      const loadImage = src => {
+        const img = document.createElement('img');
 
-      const postImgLink3 = document.createElement('img');
-      postImgLink3.src = post.imgLink3;
-      postImgLink3.classList.add('card-img');
+        if (!src) {
+          img.style.display = 'none';
+        } else {
+          img.src = src;
+          img.classList.add('card-img');
+        }
+        return img;
+      };
 
-      const postImgLink4 = document.createElement('img');
-      postImgLink4.src = post.imgLink4;
-      postImgLink4.classList.add('card-img');
+      const postImgLink1 = loadImage(post.imgLink1);
+      const postImgLink2 = loadImage(post.imgLink2);
+      const postImgLink3 = loadImage(post.imgLink3);
+      const postImgLink4 = loadImage(post.imgLink4);
+      const postImgLink5 = loadImage(post.imgLink5);
+      const postImgLink6 = loadImage(post.imgLink6);
+      const postImgLink7 = loadImage(post.imgLink7);
+      const postImgLink8 = loadImage(post.imgLink8);
+      const postImgLink9 = loadImage(post.imgLink9);
+      const postImgLink10 = loadImage(post.imgLink10);
+      const postImgLink11 = loadImage(post.imgLink11);
+      const postImgLink12 = loadImage(post.imgLink12);
 
-      const postImgLink5 = document.createElement('img');
-      postImgLink5.src = post.imgLink5;
-      postImgLink5.classList.add('card-img');
-
-      const postImgLink6 = document.createElement('img');
-      postImgLink6.src = post.imgLink6;
-      postImgLink6.classList.add('card-img');
-      
-      const postImgLink7 = document.createElement('img');
-      postImgLink7.src = post.imgLink7;
-      postImgLink7.classList.add('card-img');
-
-      const postImgLink8 = document.createElement('img');
-      postImgLink8.src = post.imgLink8;
-      postImgLink8.classList.add('card-img');
-
-      const postImgLink9 = document.createElement('img');
-      postImgLink9.src = post.imgLink9;
-      postImgLink9.classList.add('card-img');
-      
-      const postImgLink10 = document.createElement('img');
-      postImgLink10.src = post.imgLink10;
-      postImgLink10.classList.add('card-img');
-      
-      const postImgLink11 = document.createElement('img');
-      postImgLink11.src = post.imgLink11;
-      postImgLink11.classList.add('card-img');
-      
-      const postImgLink12 = document.createElement('img');
-      postImgLink12.src = post.imgLink12;
-      postImgLink12.classList.add('card-img');
 
       const postExpandDiv = document.createElement ('div');
       postExpandDiv.classList.add('expand-div');
@@ -370,10 +362,14 @@ for (const collectionValue of collections) {
       postImageContainer.appendChild(postImgLink11);
       postImageContainer.appendChild(postImgLink12);
 
+
       postSelectDiv.appendChild(postSelect);
       postCard.appendChild(postSelectDiv);
 
       postCard.appendChild(postImageContainer);
+
+      postCollectionDiv.appendChild(postCollection);
+      postCard.appendChild(postCollectionDiv);
 
       postTitleDiv.appendChild(postTitle);
       postCard.appendChild(postTitleDiv);
@@ -389,11 +385,18 @@ for (const collectionValue of collections) {
 
       postTwitterContainer.appendChild(postTwitterImg);
       postTwitterContainer.appendChild(postTwitterURL);
-      postCard.appendChild(postTwitterContainer);
+      postTwitterContainer.appendChild(postTwitterUsername);
+      postTwitterContainerDiv.appendChild(postTwitterContainer);
+      postCard.appendChild(postTwitterContainerDiv);
 
       postSocialsContainer.appendChild(postWebsiteUrlImage);
       postSocialsContainer.appendChild(postInstagramURL);
       postCard.appendChild(postSocialsContainer);
+
+      
+
+      postExpandDiv.appendChild(postExpand);
+      postCard.appendChild(postExpandDiv);
 
       postGearDiv.appendChild(postGearItem1);
       postGearDiv.appendChild(postGearItem2);
@@ -401,9 +404,6 @@ for (const collectionValue of collections) {
       postGearDiv.appendChild(postGearItem4);
       postGearDiv.appendChild(postGearItem5);
       postCard.appendChild(postGearDiv);
-
-      postExpandDiv.appendChild(postExpand);
-      postCard.appendChild(postExpandDiv);
       
       postsContainer.appendChild(postCard);
 
@@ -414,11 +414,18 @@ for (const collectionValue of collections) {
 
       checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', event => {
+          const cardImgCont = checkbox.parentElement.parentElement.querySelector('.card-img-container');
           const parentElement = checkbox.parentElement.parentElement;
           if (checkbox.checked) {
-            parentElement.style.height = '400px';
+            parentElement.style.height = '260px';
+            parentElement.style.alignItems = "flex-start";
+            parentElement.style.paddingTop = '4px';
+            cardImgCont.style.maxHeight = '240px';
           } else {
             parentElement.style.height = '72px';
+            parentElement.style.alignItems = "center";
+            parentElement.style.paddingTop = 'unset';
+            cardImgCont.style.maxHeight = '64px';
           }
         });
       });
@@ -439,7 +446,7 @@ for (const collectionValue of collections) {
         }
       });
 
-      let data = 'title,about\n'; //nabroj item field id sa framera
+      let data = 'Name / Title,About the person, Slug, Image 1, Image 2, Image 3, Image 4, Image 5, Image 6, Image 7, Image 8, TwitterID, Website, Twitter Profile URL, Twitter Image, Filter\n'; //nabroj item field id sa framera
       for (const index of selectedIndices)
         data += convertToCsv(posts[index]);
         const timestamp = formatDatetime(new Date());
@@ -483,8 +490,10 @@ function saveTextAsFile(textToWrite, fileNameToSaveAs, fileType) {
 }
 
 function convertToCsv(post) {
-  return [post.title, post.about].join(',') + '\n'; // u taj niz dodam tim redom item fieldove
+  return [post.title, post.about, post.slug, post.imgLink1, post.imgLink2, post.imgLink3, post.imgLink4, post.imgLink5, post.imgLink6, post.imgLink7, post.imgLink8, post.twitterUsername, post.websiteUrl, post.twitterURL, post.twitterImg, post.tag].join(',') + '\n'; // u taj niz dodam tim redom item fieldove
 }
+
+
 
 
 

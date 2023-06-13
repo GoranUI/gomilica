@@ -74,4 +74,21 @@ twitterUsername.addEventListener('input', () => {
 });
 
 
+// Get references to the relevant DOM elements
+const collectionFilter = document.getElementById('collection-filter');
 
+// Add event listener to the collection filter dropdown
+collectionFilter.addEventListener('change', () => {
+  // Get the selected collection value
+  const selectedCollection = collectionFilter.value;
+  const postCards = document.querySelectorAll('.post-card');
+  
+  // Loop through all post-cards and hide/show them based on the selected collection
+  postCards.forEach(postCard => {
+    if (selectedCollection === 'all' || postCard.classList.contains(selectedCollection)) {
+      postCard.style.display = 'flex';
+    } else {
+      postCard.style.display = 'none';
+    }
+  });
+});

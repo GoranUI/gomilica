@@ -77,23 +77,23 @@
       <form>
         <div class="form-field">
           <label for="gear1">Gear 1</label>
-          <input type="text" placeholder="Gear Item 1" id="gear1" name="gear1" value="" />
+          <input class="inactive" type="text" placeholder="Inactive | Scheduled for Gomilica v2.0" id="gear1" name="gear1" value="" />
         </div>
         <div class="form-field">
           <label for="gear2">Gear 2</label>
-          <input type="text" placeholder="Gear Item 2" id="gear2" name="gear2" value="" />
+          <input class="inactive" type="text" placeholder="Inactive | Scheduled for Gomilica v2.0" id="gear2" name="gear2" value="" />
         </div>
         <div class="form-field">
           <label for="gear3">Gear 3</label>
-          <input type="text" placeholder="Gear Item 3" id="gear3" name="gear3" value="" />
+          <input class="inactive" type="text" placeholder="Inactive | Scheduled for Gomilica v2.0" id="gear3" name="gear3" value="" />
         </div>
         <div class="form-field">
           <label for="gear4">Gear 4</label>
-          <input type="text" placeholder="Gear Item 4" id="gear4" name="gear4" value="" />
+          <input class="inactive" type="text" placeholder="Inactive | Scheduled for Gomilica v2.0" id="gear4" name="gear4" value="" />
         </div>
         <div class="form-field">
           <label for="gear5">Gear 5</label>
-          <input type="text" placeholder="Gear Item 5" id="gear5" name="gear5" value="" />
+          <input class="inactive" type="text" placeholder="Inactive | Scheduled for Gomilica v2.0" id="gear5" name="gear5" value="" />
         </div>
         </form>
       </div>
@@ -178,12 +178,30 @@
   </div>
     
    <div class="table-layout">
+    <div class="table-intro">
+      <h2 class="table-header2">Database</h2>
+      <p class="logosub">To preview all data, simply click the <strong>arrow</strong> in the right corner to expand the view.<br>
+      To select specific items to export to CSV, just check <strong>the mark in the left corner</strong> next to each item you want to include.</p>
+        <div class="filter">
+          <label for="collection-filter">Filter by Collection:</label>
+          <select id="collection-filter">
+            <option value="all">All Collections</option>
+            <option value="workspaces">Workspaces</option>
+            <option value="dopefolios">Dopefolios</option>
+            <option value="nice-touch">Nice touch</option>
+            <option value="user-interfaces">User-interfaces</option>
+          </select>
+        </div>
+    </div>
     <div class="table-head">
       <div class="label select">
         <p class="table-label">Mark</p>
       </div>
       <div class="label images">
         <p class="table-label">Images</p>
+      </div>
+      <div class="label collection">
+        <p class="table-label">Collection</p>
       </div>
       <div class="label title">
         <p class="table-label">Title</p>
@@ -208,19 +226,18 @@
       </div>
     </div>
      <div class="posts-container" id="posts-container"></div>
+     <div id="display">
+      <div class="form-field">
+        <button class="primary-button" id="btnExport">Export CSV</button>
+      </div>
+    </div>
    </div> 
   
 
       
-      <div id="display">
-        <div class="form-field">
-          <button class="primary-button" id="btnExport">Export CSV</button>
-        </div>
-        
-      </div>
-
-        <script src="js/style.js"></script>
-        <script src="js/app.js"></script>
+      
+      <script src="js/app.js"></script>
+      <script src="js/style.js"></script>
 
     </body>
   </html>
